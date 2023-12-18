@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Haze</title>
+    <link rel="stylesheet" href="Beauty.css" />
+    <script src="Spirit.js"></script>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <form onsubmit="return validate();">
+        <h1>Login</h1>
+        <div class="input-box">
+          <input
+            type="text"
+            placeholder="Enter Username"
+            id="username"
+            required
+          />
+          <i class="bx bxs-user"></i>
+        </div>
+        <div class="input-box">
+          <input
+            type="password"
+            placeholder="Enter Password"
+            id="password"
+            required
+          />
+          <i class="bx bxs-lock-alt"></i>
+        </div>
+
+        <div class="remeber-forgot">
+          <label><input type="checkbox" /> Remember me</label>
+        </div>
+
+        <button type="button" id="LoginButton" class="btn" onclick="validate()">
+          Login
+        </button>
+
+        <div class="register-link">
+          Don't have an account?
+          <a href="#" onclick="showRegisterForm()">Register</a>
+        </div>
+      </form>
+
+      <!-- Registration Form -->
+      <form id="registrationForm" style="display: none">
+        <h1>Register</h1>
+        <div class="input-box">
+          <input
+            type="text"
+            placeholder="Enter Your Name"
+            id="fullName"
+            required
+          />
+          <i class="bx bxs-user"></i>
+        </div>
+        <div class="input-box">
+          <input type="text" placeholder="Enter Email" id="email" required />
+          <i class="bx bxs-envelope"></i>
+        </div>
+        <div class="input-box">
+          <input
+            type="password"
+            placeholder="Create Password"
+            id="registerPassword"
+            required
+          />
+          <i class="bx bxs-lock-alt"></i>
+        </div>
+
+        <button
+          type="button"
+          id="RegisterButton"
+          class="btn"
+          onclick="register()"
+        >
+          Register
+        </button>
+
+        <div class="register-link">
+          Already have an account?
+          <a href="#" onclick="showLoginForm()">Login</a>
+        </div>
+      </form>
+    </div>
+    <script>
+      // Data array
+      const users = [
+        { username: "Mermo", password: "Meow" },
+        { username: "Yes", password: "King" },
+        // Add more users as needed
+      ];
+
+      function validate() {
+        const enteredUsername = document.getElementById("username").value;
+        const enteredPassword = document.getElementById("password").value;
+
+        // Check if entered credentials match any user
+        const isValidUser = users.some(
+          (user) =>
+            user.username === enteredUsername &&
+            user.password === enteredPassword
+        );
+
+        if (isValidUser) {
+          // Redirect to another HTML file upon successful login
+          window.location.href = "http://127.0.0.1:5500/Main.html";
+          alert("Login successful! Welcome " + enteredUsername);
+        } else {
+          alert("Login failed");
+        }
+      }
+
+      function register() {
+        // Get user registration data from input fields
+        const fullName = document.getElementById("fullName").value;
+        const email = document.getElementById("email").value;
+        const registerPassword =
+          document.getElementById("registerPassword").value;
+
+        // Add the new user to the array
+        users.push({ username: fullName, password: registerPassword });
+
+        alert(
+          "Registration successful. You can now login with your credentials."
+        );
+
+        // Optionally, you can automatically switch to the login form after registration
+        showLoginForm();
+      }
+
+      function showRegisterForm() {
+        document.getElementById("registrationForm").style.display = "block";
+        document.querySelector("form").style.display = "none";
+      }
+
+      function showLoginForm() {
+        document.getElementById("registrationForm").style.display = "none";
+        document.querySelector("form").style.display = "block";
+      }
+
+      function showRegisterForm() {
+        document.getElementById("registrationForm").style.display = "block";
+        document.querySelector("form").style.display = "none";
+      }
+
+      function showLoginForm() {
+        document.getElementById("registrationForm").style.display = "none";
+        document.querySelector("form").style.display = "block";
+      }
+    </script>
+  </body>
+</html>
